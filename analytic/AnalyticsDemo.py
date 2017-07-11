@@ -77,7 +77,7 @@ class AnalyticsDemo():
 
         return output
 
-    def AshalimRevenueCalc(self, jsondataInput):
+    def AnalyticsDemoCalc(self, jsondataInput):
         """
         AnalyticsDemo calculate Revenue:
         Input has data of previous hour and current hour !!!
@@ -157,7 +157,7 @@ class AnalyticsDemo():
     def runAll(self, jsondataInput):
         print 'start run all:'
         data_json = json.loads(jsondataInput)
-        result = self.AshalimRevenueCalc(data_json)
+        result = self.AnalyticsDemoCalc(data_json)
         print 'AnalyticsDemo Analysis finishes!'
 
         return result

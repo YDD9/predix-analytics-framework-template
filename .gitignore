@@ -2,5 +2,6 @@
 *.pyc
 *.xml
 *.lnk
+*.log
 .vscode
 .idea
