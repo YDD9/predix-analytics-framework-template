@@ -1,4 +1,4 @@
-#AnalyticsDemo Analysis 
+# AnalyticsDemo Analysis 
 
 A python-based  analytic for Predix-Analytic-Framework.
 Further Orchestration can be done with this analytics: Input from Predix Timeseries, scheduler run.
