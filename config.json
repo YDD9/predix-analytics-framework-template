@@ -1,0 +1,8 @@
+{
+  "entry-method": "analytic.AnalyticsDemo.runAll",
+  "non-conda-libs": [
+    "boto"
+  ],
+  "conda-libs": [
+    "numpy"  ]
+}

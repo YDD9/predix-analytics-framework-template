@@ -1,0 +1,6 @@
+*.zip
+*.pyc
+*.xml
+*.lnk
+.vscode
+.idea

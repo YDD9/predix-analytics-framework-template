@@ -1,0 +1,14 @@
+{
+  "data": {
+    "constants": {
+      "ABC": 2.8,
+      "XYZ": [1, 2, 3]
+    },
+    "time_series": {
+      "time_stamp": [1494573513000, 1494573543000],
+      "Signal_ONE": [79, 23],
+      "Signal_TWO": [65, 75],
+      "Signal_THREE": [29.12, 78.654]
+    }
+  }
+}
