@@ -18,8 +18,14 @@ To run this analytic locally, you will need to have the following:
 4. Deploy and test the analytic on Predix Analytics platform.  
 
 ## Analytic template
-This analytic takes timeseries and constants and returns timeseries. This structure is outlined in MillSteadyStatedetection_template.json     
-(Step for Orchestration only)Upload this json file into Analytics Catalog as template together with your Analytics executable.
+This analytic takes timeseries and constants and returns timeseries.   
+(Step for Orchestration only)Upload this json file into Analytics Catalog as template together with your Analytics executable.  
+
+|Signal |Description|from Module|Input Output|Unit|
+|-----------------------|-----------------------|---------|--------|--------------|
+|h_H2O|Evaporation enthalpy of water||Constants|MJ/kg|
+
+
 
 ## Input format
 The expected JSON input data format is shown in following file:  
