@@ -1,0 +1,352 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Asset TS query",
+		"_postman_id": "107a4660-2185-0509-8086-7499edc762c7",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Token Using Client Credentials Grant Type",
+			"request": {
+				"url": "https://{{uaa_uri}}/oauth/token",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, application/x-www-form-urlencoded",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YXBwY2xpZW50MTp5N2hnN2prNQ==",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						}
+					]
+				},
+				"description": "This request is configured to retrieve a token from your UAA instance using the Client Credentials grant type. You must 1) Put your UAA's issuer ID ({UAA URI}/oauth/token) in the request endpoint; and 2) Fill out the Authorization header, either manually in the Headers tab, or by choosing \"Basic\" and entering your client credentials in the Authorization tab"
+			},
+			"response": []
+		},
+		{
+			"name": "Get values with filter",
+			"request": {
+				"url": "https://{{timeseries-query-host}}/v1/datapoints",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "predix-zone-id",
+						"value": "{{timeseries-zone-id}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"tags\": [\n    {\n      \"name\": \"attribute_test\",\n      \"order\": \"desc\",\n      \"filters\": \n        {\n          \"attributes\":{\"startup\":\"true\"}\n        }\n    }\n  ],\n  \"start\": 10y-ago\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Check taskFuel INPUT",
+			"request": {
+				"url": "https://{{timeseries-query-host}}/v1/datapoints",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "predix-zone-id",
+						"value": "{{timeseries-zone-id}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"tags\": [\n   {\n      \"name\": \"lam_air_tot\",\n      \"order\": \"desc\",\n      \"limit\": 1\n    },{\n      \"name\": \"B1_S1_x_H2O_raw\",\n      \"order\": \"desc\",\n      \"limit\": 1\n    },{\n      \"name\": \"B1_S1_LHV_raw\",\n      \"order\": \"desc\",\n      \"limit\": 1\n    },{\n      \"name\": \"B1_S1_Mdot_coal_raw\",\n      \"order\": \"desc\",\n      \"limit\": 1\n    },{\n      \"name\": \"B1_S2_x_TiO2_raw\",\n      \"order\": \"desc\",\n      \"limit\": 1\n    }\n    \n\n  ],\n  \"start\": 1502012280000,\n  \"end\": 1502012400000\n  \n}"
+				},
+				"description": "4Bunkers_Level1st\ninput\n\nDeNOx\nCombustion\nFoulSlag\nFuelAsh"
+			},
+			"response": []
+		},
+		{
+			"name": "Check taskFuel output",
+			"request": {
+				"url": "https://{{timeseries-query-host}}/v1/datapoints",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "predix-zone-id",
+						"value": "{{timeseries-zone-id}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"tags\": [\n\n   {\n      \"name\": \"T_Air_RAPH_in\",\n      \"order\": \"desc\",\n      \"limit\": 1\n    },{\n      \"name\": \"Bav_S1_x_NOx1_EXPECT\",\n      \"order\": \"desc\",\n      \"limit\": 1\n    },{\n      \"name\": \"Bav_S1_nm_SO2_FG_capt\",\n      \"order\": \"desc\",\n      \"limit\": 1\n    },{\n      \"name\": \"c_NOx1_FG_dry_tar_cal\",\n      \"order\": \"desc\",\n      \"limit\": 1\n    },{\n      \"name\": \"B4_S1_yn_SO2_FG_dry\",\n      \"order\": \"desc\",\n      \"limit\": 1\n    },{\n      \"name\": \"B1_S1_Foul_Color\",\n      \"order\": \"desc\",\n      \"limit\": 1\n    },{\n      \"name\": \"B4_S1_x_Ash_dry\",\n      \"order\": \"desc\",\n      \"limit\": 1\n    }\n  ],\n  \"start\": 10d-ago\n  \n}"
+				},
+				"description": "4Bunkers_Level1st\ninput\n\nDeNOx\nCombustion\nFoulSlag\nFuelAsh"
+			},
+			"response": []
+		},
+		{
+			"name": "Get user defined asset",
+			"request": {
+				"url": "https://{{asset_host}}/v1/tag/b1_s1_x_n_raw",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "predix-zone-id",
+						"value": "{{asset_zone_id}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "get all asset\n/classifications\n/enterprise\n/site\n/asset\n/tag"
+			},
+			"response": []
+		},
+		{
+			"name": "Create asset/Update asset if uri the same",
+			"request": {
+				"url": "https://{{asset_host}}/v1/tag",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "predix-zone-id",
+						"value": "{{asset_zone_id}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"name\": \"Bav_S1_x_CaO_ash\",\n        \"alias\": \"Bav_S1_x_CaO_ash\",\n        \"uri\": \"/tag/bav_s1_x_cao_ash\",\n        \"description\": \"Ash Parameter\",\n        \"type\": \"Fuel & Ash\",\n        \"parent\": \"/asset/boiler\",\n        \"attributes\": {\n            \"engUnit\": \"kg/kg\",\n            \"DispEngUnit\": \"kg/kg\",\n            \"span\": null,\n            \"typicalvalue\": null,\n            \"displaydigits\": 2,\n            \"lowlow\": 0.004,\n            \"low\": 0.006,\n            \"high\": 0.03,\n            \"highhigh\": 0.04\n        }\n    }\n]"
+				},
+				"description": "get all asset\n/classifications\n/enterprise\n/site\n/asset\n/tag"
+			},
+			"response": []
+		},
+		{
+			"name": "Check all tags in ts",
+			"request": {
+				"url": "https://{{timeseries-query-host}}/v1/tags",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "predix-zone-id",
+						"value": "{{timeseries-zone-id}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"tags\": [\n   {\n      \"name\": \"lam_air_tot\",\n      \"order\": \"desc\",\n      \"limit\": 1\n    },{\n      \"name\": \"B1_S1_x_H2O_raw\",\n      \"order\": \"desc\",\n      \"limit\": 1\n    },{\n      \"name\": \"B1_S1_LHV_raw\",\n      \"order\": \"desc\",\n      \"limit\": 1\n    },{\n      \"name\": \"B1_S1_Mdot_coal_raw\",\n      \"order\": \"desc\",\n      \"limit\": 1\n    },{\n      \"name\": \"B1_S2_x_TiO2_raw\",\n      \"order\": \"desc\",\n      \"limit\": 1\n    }\n    \n\n  ],\n  \"start\": 1502012280000,\n  \"end\": 1502012400000\n  \n}"
+				},
+				"description": "4Bunkers_Level1st\ninput\n\nDeNOx\nCombustion\nFoulSlag\nFuelAsh"
+			},
+			"response": []
+		},
+		{
+			"name": "Check multiTags values",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var start_timestamp = new Date('12 Jan 2018 00:05:00 GMT');",
+							"var end_timestamp = new Date('15 Jan 2018 00:15:00 GMT');",
+							"",
+							"postman.setGlobalVariable('start_epoch', start_timestamp.getTime());",
+							"postman.setGlobalVariable('end_epoch', end_timestamp.getTime());"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://{{timeseries-query-host}}/v1/datapoints",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "predix-zone-id",
+						"value": "{{timeseries-zone-id}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"tags\": [\n   {\n      \"name\": [\"M1_VOL_AIR_IN_X1\",\"M1_M_COAL_Xf\",\"M1_T_PFDUCT_AV_Df\",\"M1_CLASS_Xf\",\"M1_CLASS_Vf\",\"M1_COAL_Vf\",\"M1_M_COAL_X1\",\"M1_VOL_AIR_IN_Vf\",\"M1_VOL_AIR_IN_Xf\",\"M1_T_PFDUCT_AV_Xf\",\"M1_COAL_Df\",\"M1_CLASS_Df\",\"M1_T_PFDUCT_AV_Vf\",\"M1_VOL_AIR_IN_Df\",\"M1_CLASS_X1\",\"M1_T_PFDUCT_AV_X1\"],\n      \"order\": \"desc\",\n      \"limit\": 1\n    }],\n  \"start\": {{start_epoch}},\n  \"end\": {{end_epoch}}\n}"
+				},
+				"description": "4Bunkers_Level1st\ninput\n\nDeNOx\nCombustion\nFoulSlag\nFuelAsh"
+			},
+			"response": []
+		},
+		{
+			"name": "Check OMU Tags values",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var start_timestamp = new Date('01 Jan 2016 00:05:00 GMT');",
+							"var end_timestamp = new Date('01 Jan 2016 00:15:00 GMT');",
+							"",
+							"postman.setGlobalVariable('start_epoch', start_timestamp.getTime());",
+							"postman.setGlobalVariable('end_epoch', end_timestamp.getTime());"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://{{timeseries-query-host}}/v1/datapoints",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "predix-zone-id",
+						"value": "{{timeseries-zone-id}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"tags\": [\n   {\n      \"name\": [\"OMU2_MILLMILL1.M1_CLASS_Df\",\"OMU2_MILLMILL1.M1_M_COAL_X1\"],\n      \"order\": \"desc\",\n      \"limit\": 10\n    }],\n  \"start\": {{start_epoch}},\n  \"end\":{{end_epoch}}\n  \n}"
+				},
+				"description": "OMU State signals input"
+			},
+			"response": []
+		},
+		{
+			"name": "Check Tags values Interpolate",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var start_timestamp = new Date('01 Jan 2016 00:05:00 GMT');",
+							"var end_timestamp = new Date('01 Jan 2016 00:15:00 GMT');",
+							"",
+							"postman.setGlobalVariable('start_epoch', start_timestamp.getTime());",
+							"postman.setGlobalVariable('end_epoch', end_timestamp.getTime());"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://{{timeseries-query-host}}/v1/datapoints",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "predix-zone-id",
+						"value": "{{timeseries-zone-id}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"tags\": [\n   {\n      \"name\": [\"OMU2_MILLMILL1.M1_LHV_COAL_RAW\"],\n      \"order\": \"desc\",\n      \"limit\": 10,\n       \"aggregations\": [\n      {\n        \"interval\": \"5mi\",\n        \"type\": \"interpolate\"\n      }\n    ]\n    }\n  ],\n  \"start\": {{start_epoch}},\n  \"end\": {{end_epoch}}\n}"
+				},
+				"description": "4Bunkers_Level1st\ninput\n\nDeNOx\nCombustion\nFoulSlag\nFuelAsh"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE asset if uri the same",
+			"request": {
+				"url": "https://{{asset_host}}/v1/enterprise/montblancpower",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "bearer {{token}}",
+						"description": ""
+					},
+					{
+						"key": "predix-zone-id",
+						"value": "{{asset_zone_id}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "get all asset\n/classifications\n/enterprise\n/site\n/asset\n/tag"
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,1135 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Analytics Catalog",
+		"_postman_id": "474554b4-a8fc-59c1-435e-4030cde89075",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Analytic Execution",
+			"description": "",
+			"item": [
+				{
+					"name": "Synchronous Execution",
+					"request": {
+						"url": "https://{{analytics_Id}}.run.asv-pr.ice.predix.io/api/v1/analytic/execution",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"number1\":2,\"number2\":4}"
+						},
+						"description": "Execute the analytic synchronously. The analytic_uri is the analytic catalog entry id followed by your Predix Platform domain name."
+					},
+					"response": []
+				},
+				{
+					"name": "Trigger Asynchronous Execution",
+					"request": {
+						"url": "<analytic_uri>/api/v1/analytic/execution/async",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"number1\":2,\"number2\":4}"
+						},
+						"description": "Trigger the analytic to execute asynchronously. The analytic_uri is the analytic catalog entry id followed by your Predix Platform domain name."
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Async Execution Status",
+					"request": {
+						"url": "<analytic_uri>/api/v1/analytic/execution/async/<requestId>/status",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Retrieve the status of the requested asynchronous analytic execution. The analytic_uri is the analytic catalog entry id followed by your Predix Platform domain name."
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Async Execution Result",
+					"request": {
+						"url": "<analytic_uri>/api/v1/analytic/execution/async/<requestId>/result",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "Retrieve the result of the requested asynchronous analytic execution. The analytic_uri is the analytic catalog entry id followed by your Predix Platform domain name."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Analytics",
+			"description": "",
+			"item": [
+				{
+					"name": "Create Analytic",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData=JSON.parse(responseBody)",
+									"postman.setEnvironmentVariable(\"analytics_Id\",jsonData.id)"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{catalog_uri}}/api/v1/catalog/analytics",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{analytics_name}}\",\n    \"version\": \"{{analytics_version}}\",\n    \"supportedLanguage\": \"Python\",\n    \"taxonomyLocation\": \"\",\n    \"author\": \"Shuai\",\n    \"description\": \"{{analytics_description}}\",\n    \"customMetadata\": \"{\\\"assetid\\\":\\\"\\\"}\"\n}"
+						},
+						"description": ""
+					},
+					"response": [
+						{
+							"id": "6b3c69c3-2f24-45ab-bb09-802fcbc5b9fb",
+							"name": "502 error",
+							"originalRequest": {
+								"url": "https://predix-analytics-catalog-release.run.aws-usw02-pr.ice.predix.io/api/v1/catalog/analytics",
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"name": "Content-Type"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJSUzI1NiJ9.eyJqdGkiOiI0OTJkMWExYy1jNjVlLTRmODgtODc1Mi1kZDJlZjI5ODE1ZDkiLCJzdWIiOiI4MzM1MTBiZS05NmJiLTQxYzgtOTIyMC0xMzk2ZWUxMDdhZWMiLCJzY29wZSI6WyJhbmFseXRpY3Muem9uZXMuY2IxZjVjMjktMjVlYS00YmZhLTgxNmYtNjRlOTQ4Y2M2MzQ0LnVzZXIiLCJhbmFseXRpY3Muem9uZXMuYjNlMTkzNGUtMWVhZi00MjcxLTlmZDItY2ZmZjdkNDUxZDIxLnVzZXIiXSwiY2xpZW50X2lkIjoiYWRtaW4iLCJjaWQiOiJhZG1pbiIsImF6cCI6ImFkbWluIiwiZ3JhbnRfdHlwZSI6InBhc3N3b3JkIiwidXNlcl9pZCI6IjgzMzUxMGJlLTk2YmItNDFjOC05MjIwLTEzOTZlZTEwN2FlYyIsIm9yaWdpbiI6InVhYSIsInVzZXJfbmFtZSI6ImFsbGVuLmNodUBnZS5jb20iLCJlbWFpbCI6ImFsbGVuLmNodUBnZS5jb20iLCJhdXRoX3RpbWUiOjE0NTAzOTMxODcsInJldl9zaWciOiI0YTIzOGRjZiIsImlhdCI6MTQ1MDM5MzE4NywiZXhwIjoxNDUwNDM2Mzg3LCJpc3MiOiJodHRwczovLzg3OTk1YzUzLWJiZTctNDRhOC1hZTIwLWFmMDA3OGVkZTM5NS5wcmVkaXgtdWFhLnJ1bi5hd3MtdXN3MDItcHIuaWNlLnByZWRpeC5pby9vYXV0aC90b2tlbiIsInppZCI6Ijg3OTk1YzUzLWJiZTctNDRhOC1hZTIwLWFmMDA3OGVkZTM5NSIsImF1ZCI6WyJhZG1pbiIsImFuYWx5dGljcy56b25lcy5jYjFmNWMyOS0yNWVhLTRiZmEtODE2Zi02NGU5NDhjYzYzNDQiLCJhbmFseXRpY3Muem9uZXMuYjNlMTkzNGUtMWVhZi00MjcxLTlmZDItY2ZmZjdkNDUxZDIxIl19.n-VAjTsUHsxXkz_b79RNRrpmXgPs0D8GlCqoXPh23fKilzviRyLz27lrpuQ5NDho_53Lo5R7DRb80XZM5XBjrUomT1Byp5xIZgRdJteMyfWblJZ7W_tsj6Irf4JTt9R3kYamPRjSVmMLW4BwomSpMIL6-umgUH9j7aTOR8R6StbjUkIAydvtrXWlWFgHLmWsX0cLms7lI3mOaRI2XGr-Q0EGzsXHs7fibH3NZ-BvdwRraM2dTr94RdlyuH2jAClYSHLzvJnwtuvSO1Dze8OcsfJgwqyCFQ02Hd2lTbVxRq0vk3neQxdE9jHgxPRbYSTr00yxs3o6mfu7CQasdS9pWA",
+										"name": "Authorization"
+									},
+									{
+										"key": "Predix-Zone-Id",
+										"value": "cb1f5c29-25ea-4bfa-816f-64e948cc6344",
+										"name": "Predix-Zone-Id"
+									},
+									{
+										"key": "Cache-Control",
+										"name": "Cache-Control",
+										"value": "no-cache"
+									},
+									{
+										"key": "Postman-Token",
+										"name": "Postman-Token",
+										"value": "59b1f823-49b6-b478-6fd7-0a089e357b88"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"matlab analytic\",\n    \"version\": \"v1\",\n    \"supportedLanguage\": \"Matlab\",\n    \"taxonomyLocation\": \"/demo-analytics/matlab-test\",\n    \"author\": \"Allen Chu\",\n    \"description\": \"test matlab adder\"\n}"
+								},
+								"description": ""
+							},
+							"status": "Bad Gateway",
+							"code": 502,
+							"_postman_previewlanguage": "html",
+							"_postman_previewtype": "html",
+							"header": [
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "67",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "text/plain; charset=utf-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Thu, 17 Dec 2015 23:16:37 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "X-Cf-Requestid",
+									"key": "X-Cf-Requestid",
+									"value": "dd72f88f-66b5-4515-7e80-f8a54051a458",
+									"description": "Custom header"
+								},
+								{
+									"name": "X-Cf-Routererror",
+									"key": "X-Cf-Routererror",
+									"value": "endpoint_failure",
+									"description": "Custom header"
+								}
+							],
+							"cookie": [],
+							"responseTime": 26358,
+							"body": "502 Bad Gateway: Registered endpoint failed to handle the request.\n"
+						}
+					]
+				},
+				{
+					"name": "Retrieve All Analytics",
+					"request": {
+						"url": "https://{{catalog_uri}}/api/v1/catalog/analytics",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Analytic(s) By Name",
+					"request": {
+						"url": {
+							"raw": "{{catalog_uri}}/api/v1/catalog/analytics/versions?name=java-demo-adder",
+							"host": [
+								"{{catalog_uri}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"catalog",
+								"analytics",
+								"versions"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "java-demo-adder"
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Analytic By ID",
+					"request": {
+						"url": "{{catalog_uri}}/api/v1/catalog/analytics/63fec285-8a85-494f-8232-54ea116fdf52",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update Analytic",
+					"request": {
+						"url": "{{catalog_uri}}/api/v1/catalog/analytics/{{analytics_Id}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{analytics_Id}}\",\n    \"name\": \"aaa analytic\",\n    \"version\": \"v1\",\n    \"supportedLanguage\": \"Python\",\n    \"taxonomyLocation\": \"\",\n    \"author\": \"test\",\n    \"description\": \"test\",\n    \"customMetadata\": \"{\\\"assetid\\\":\\\"abc\\\"}\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Analytic",
+					"request": {
+						"url": "{{catalog_uri}}/api/v1/catalog/analytics/6627be64-ab13-4e69-9b06-8c403dfbfcb3",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete All Versions of an Analytic",
+					"request": {
+						"url": "{{catalog_uri}}/api/v1/catalog/analytics/ANALYTIC_NAME/versions",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Analytic Logs",
+					"request": {
+						"url": "https://{{catalog_uri}}/api/v1/catalog/analytics/{{analytics_Id}}/logs",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/plain",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Artifacts",
+			"description": "",
+			"item": [
+				{
+					"name": "Create Artifact",
+					"request": {
+						"url": "https://{{catalog_uri}}/api/v1/catalog/artifacts",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "perfeval.zip",
+									"value": ""
+								},
+								{
+									"key": "catalogEntryId",
+									"value": "{{analytics_Id}}",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "Executable",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Perf Eval Python",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Artifact template",
+					"request": {
+						"url": "{{catalog_uri}}/api/v1/catalog/artifacts",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "demo-timeseries-python-adder-template.json",
+									"value": ""
+								},
+								{
+									"key": "catalogEntryId",
+									"value": "{{analytics_Id}}",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "template",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "mill optimzer python",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Artifact Executable",
+					"request": {
+						"url": "{{catalog_uri}}/api/v1/catalog/artifacts",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "",
+									"type": "file"
+								},
+								{
+									"key": "catalogEntryId",
+									"value": "{{analytics_Id}}",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "Executable",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Foul & Slag color indication",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Artifacts for Analytic",
+					"request": {
+						"url": "{{catalog_uri}}/api/v1/catalog/analytics/{{analytics_Id}}/artifacts",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"value": "",
+									"type": "file"
+								},
+								{
+									"key": "catalogEntryId",
+									"value": "8834da45-7800-4984-b9a9-cde7947a7af4",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "Executable",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "demo adder python",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update Artifact",
+					"request": {
+						"url": "{{catalog_uri}}/api/v1/catalog/artifacts/cbed02df-68d9-451e-92b0-4c7949b69519",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "description",
+									"value": "demo adder python updated desc",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update Artifact Executable",
+					"request": {
+						"url": "{{catalog_uri}}/api/v1/catalog/artifacts/b48fc0d2-0b43-4d58-861d-a3b5d2c72400",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "description",
+									"value": "Fuel",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"value": "",
+									"description": "",
+									"type": "file"
+								},
+								{
+									"key": "type",
+									"value": "Executable",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Artifact",
+					"request": {
+						"url": "{{catalog_uri}}/api/v1/catalog/artifacts/8a979364-151a-4601-a7f2-26830e94de59",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Download Artifact File",
+					"request": {
+						"url": "{{catalog_uri}}/api/v1/catalog/artifacts/cbed02df-68d9-451e-92b0-4c7949b69519/file",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "**POSTMAN DOES NOT CURRENTLY SUPPORT THIS REQUEST.** This is just for reference. In order to actually download the file, you will need to enter the full URL in your browser and make sure you send all of the headers in this request using a plugin such as ModHeaders for Chrome."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Taxonomy",
+			"description": "",
+			"item": [
+				{
+					"name": "Get Taxonomy",
+					"request": {
+						"url": "{{catalog_uri}}/api/v1/catalog/taxonomy",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Load Taxonomy",
+					"request": {
+						"url": "{{catalog_uri}}/api/v1/catalog/taxonomy",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"node_name\": \"uncategorized2\",\n    \"child_nodes\": []\n}"
+						},
+						"description": "create your Taxonomy"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Validation/Deployment/Execution",
+			"description": "",
+			"item": [
+				{
+					"name": "Validate Analytic",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"validationRequestId\", jsonData.validationRequestId);"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{catalog_uri}}/api/v1/catalog/analytics/{{analytics_Id}}/validation",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"data\": {\r\n    \"constants\": {\r\n      \"speciesname\": \"NOx\",\r\n      \"concunit\": \"ppm\",\r\n      \"O2norm\": [3],\r\n      \"time_range\": [1]\r\n    },\r\n    \"time_series\": {\r\n      \"time_stamp\": [1506816000000, 1506816060000, 1506816120000, 1506816180000, 1506816240000, 1506816300000, 1506816360000, 1506816420000, 1506816480000, 1506816540000, 1506816600000, 1506816660000, 1506816720000, 1506816780000, 1506816840000, 1506816900000, 1506816960000, 1506817020000, 1506817080000, 1506817140000, 1506817200000, 1506817260000, 1506817320000, 1506817380000, 1506817440000, 1506817500000, 1506817560000, 1506817620000, 1506817680000, 1506817740000, 1506817800000, 1506817860000, 1506817920000, 1506817980000, 1506818040000, 1506818100000, 1506818160000, 1506818220000, 1506818280000, 1506818340000, 1506818400000, 1506818460000, 1506818520000, 1506818580000, 1506818640000, 1506818700000, 1506818760000, 1506818820000, 1506818880000, 1506818940000, 1506819000000, 1506819060000, 1506819120000, 1506819180000, 1506819240000, 1506819300000, 1506819360000, 1506819420000, 1506819480000, 1506819540000, 1506819600000, 1506819660000, 1506819720000, 1506819780000, 1506819840000, 1506819900000, 1506819960000, 1506820020000, 1506820080000, 1506820140000, 1506820200000, 1506820260000, 1506820320000, 1506820380000, 1506820440000, 1506820500000, 1506820560000, 1506820620000, 1506820680000, 1506820740000, 1506820800000, 1506820860000, 1506820920000, 1506820980000, 1506821040000, 1506821100000, 1506821160000, 1506821220000, 1506821280000, 1506821340000, 1506821400000, 1506821460000, 1506821520000, 1506821580000, 1506821640000, 1506821700000, 1506821760000, 1506821820000, 1506821880000, 1506821940000, 1506822000000, 1506822060000, 1506822120000, 1506822180000, 1506822240000, 1506822300000, 1506822360000, 1506822420000, 1506822480000, 1506822540000, 1506822600000, 1506822660000, 1506822720000, 1506822780000, 1506822840000, 1506822900000, 1506822960000, 1506823020000, 1506823080000, 1506823140000, 1506823200000, 1506823260000, 1506823320000, 1506823380000, 1506823440000, 1506823500000, 1506823560000, 1506823620000, 1506823680000, 1506823740000, 1506823800000, 1506823860000, 1506823920000, 1506823980000, 1506824040000, 1506824100000, 1506824160000, 1506824220000, 1506824280000, 1506824340000, 1506824400000, 1506824460000, 1506824520000, 1506824580000, 1506824640000, 1506824700000, 1506824760000, 1506824820000, 1506824880000, 1506824940000, 1506825000000, 1506825060000, 1506825120000, 1506825180000, 1506825240000, 1506825300000, 1506825360000, 1506825420000, 1506825480000, 1506825540000, 1506825600000, 1506825660000, 1506825720000, 1506825780000, 1506825840000, 1506825900000, 1506825960000, 1506826020000, 1506826080000, 1506826140000, 1506826200000, 1506826260000, 1506826320000, 1506826380000, 1506826440000, 1506826500000, 1506826560000, 1506826620000, 1506826680000, 1506826740000, 1506826800000, 1506826860000, 1506826920000, 1506826980000, 1506827040000, 1506827100000, 1506827160000, 1506827220000, 1506827280000, 1506827340000, 1506827400000, 1506827460000, 1506827520000, 1506827580000, 1506827640000, 1506827700000, 1506827760000, 1506827820000, 1506827880000],\r\n      \"species\": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199],\r\n      \"massflow\": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199],\r\n      \"O2act\": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199]\r\n    }\r\n  }\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Validation Status",
+					"request": {
+						"url": "{{catalog_uri}}/api/v1/catalog/analytics/{{analytics_Id}}/validation/{{validationRequestId}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Undeploy Test Analytic",
+					"request": {
+						"url": "{{catalog_uri}}/api/v1/catalog/analytics/869dc385-5d88-49be-9b96-86edab395bc3/validation",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Deploy Analytic",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"analyticsdeployment_requestIdId\", jsonData.requestId);"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{catalog_uri}}/api/v1/catalog/analytics/{{analytics_Id}}/deployment",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"memory\":512,\n    \"diskQuota\":1024,\n    \"instances\":1\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Deployment Status",
+					"request": {
+						"url": "{{catalog_uri}}/api/v1/catalog/analytics/{{analytics_Id}}/deployment/{{analyticsdeployment_requestId}}",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Execute Analytic",
+					"request": {
+						"url": "{{catalog_uri}}/api/v1/catalog/analytics/{{analytics_Id}}/execution",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Predix-Zone-Id",
+								"value": "{{catalog_tenant}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"number1\":2,\"number2\":4}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

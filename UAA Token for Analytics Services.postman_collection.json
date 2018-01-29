@@ -1,0 +1,140 @@
+{
+	"variables": [],
+	"info": {
+		"name": "UAA Token for Analytics Services",
+		"_postman_id": "83f13882-2a96-7543-1ddf-846b05c36ed2",
+		"description": "This collection contains templates for making UAA calls to obtain OAuth2 tokens.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Token Using Client Credentials Grant Type",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"token\", jsonData.access_token);"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"username": "{{clientname}}",
+						"password": "{{clientpassword}}",
+						"saveHelperData": true,
+						"showPassword": false
+					}
+				},
+				"url": "https://{{uaa_uri}}/oauth/token",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, application/x-www-form-urlencoded",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic b211Y2xpZW50OmFkb1Y1NHZ5",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						}
+					]
+				},
+				"description": "This request is configured to retrieve a token from your UAA instance using the Client Credentials grant type. You must 1) Put your UAA's issuer ID ({UAA URI}/oauth/token) in the request endpoint; and 2) Fill out the Authorization header, either manually in the Headers tab, or by choosing \"Basic\" and entering your client credentials in the Authorization tab"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Token Using Password Grant Type",
+			"request": {
+				"url": "https://{{uaa_uri}}/oauth/token",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, application/x-www-form-urlencoded",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YXBwX2NsaWVudF9pZDpzZWNyZXQ=",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "text"
+						}
+					]
+				},
+				"description": "This request is configured to retrieve a token from your UAA instance using the Password grant type. You must 1) Put your UAA's issuer ID ({UAA URI}/oauth/token) in the request endpoint; 2) Fill out the Authorization header, either manually in the Headers tab, or by choosing \"Basic\" and entering your client credentials in the Authorization tab; and 3) Fill out your username and password in the request body."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Token Using Refresh Token Grant Type",
+			"request": {
+				"url": "https://{{uaa_uri}}/oauth/token",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json, application/x-www-form-urlencoded",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YXBwX2NsaWVudF9pZDpzZWNyZXQ=",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "refresh_token",
+							"type": "text"
+						},
+						{
+							"key": "refresh_token",
+							"value": "{{refresh_token}}",
+							"type": "text"
+						}
+					]
+				},
+				"description": "This request is configured to retrieve a token from your UAA instance using the Refresh Token grant type. You must 1) Put your UAA's issuer ID ({UAA URI}/oauth/token) in the request endpoint; 2) Fill out the Authorization header, either manually in the Headers tab, or by choosing \"Basic\" and entering your client credentials in the Authorization tab; and 3) Add the refresh token (which can only be obtained from a UAA token request using the Password grant type) in the request body"
+			},
+			"response": []
+		}
+	]
+}
